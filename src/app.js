@@ -18,8 +18,9 @@ app.post ('/sign-up', (req, res) => {
 
 app.post ('/tweets', (req, res) => {
     const {username, tweet} = req.body;
+    const usernameError = users.find((user) => user.username === username);
 
-    if (!username){
+    if (!usernameError){
         return res.send('UNAUTHORIZED');
     };
 
@@ -30,7 +31,7 @@ app.post ('/tweets', (req, res) => {
 
 app.get ('/tweets', (req, res) => {
     if (tweets.length > 10){
-        const feedlimit = tweets.slice(-10);
+        const feedlimit = feed.slice(-10);
         return res.send(feedlimit);
     };
 
